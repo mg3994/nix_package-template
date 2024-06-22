@@ -1,7 +1,7 @@
 # nix_package-template
 Learn Making Nix pkg
 ```nix
-{stdenv, fetchFromGithub, gcc, make, pkgconfig, binutils };
+{stdenv, lib, fetchFromGithub, gcc, make, pkgconfig, binutils };
 stdenv.mkDerivation rec {
  pname = "antinna";
  version = "1.0.0";
@@ -14,7 +14,7 @@ src = fetchFromGithub {
 };
  buildInputs = [ gcc make pkgconfig binutils ];
 
-meta = with stdenv.lib; {
+meta = with lib; {
  description = "Fully Nix Based Package to Run All IDX templates";
  homepage = "https://github.com/mg3994/${pname}";
  license = licenses.mit;
@@ -31,7 +31,7 @@ meta = with stdenv.lib; {
 # from url
 
 ```nix
-{stdenv,fetchurl, runTimePackage, fetchFromGithub, gcc, make, pkgconfig, binutils };
+{stdenv, lib, fetchurl, runTimePackage, fetchFromGithub, gcc, make, pkgconfig, binutils };
 stdenv.mkDerivation rec {
  pname = "antinna";
  version = "1.0.0";
@@ -46,8 +46,8 @@ mkdir -p $out/bin
 cp ${pname} $out/bin/
 '';
 
-propagatedBuildInputs = [ runTimePackage ] # you have to replace it with required runTime packages like pkg. ....
-meta = with stdenv.lib; {
+propagatedBuildInputs = [ runTimePackage ] # you have to replace it with required runTime packages like gzip and all # those
+meta = with lib; {
  description = "Fully Nix Based Package to Run All IDX templates";
  homepage = "https://github.com/mg3994/${pname}"; # or use example.com
  license = licenses.mit;
