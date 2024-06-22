@@ -46,7 +46,7 @@ mkdir -p $out/bin
 cp ${pname} $out/bin/
 '';
 
-propagatedBuildInputs = [ runTimePackage ]
+propagatedBuildInputs = [ runTimePackage ] # you have to replace it with required runTime packages like pkg. ....
 meta = with stdenv.lib; {
  description = "Fully Nix Based Package to Run All IDX templates";
  homepage = "https://github.com/mg3994/${pname}"; # or use example.com
