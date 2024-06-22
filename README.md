@@ -26,3 +26,36 @@ meta = with stdenv.lib; {
 }
 
 ```
+
+# OR
+# from url
+
+```nix
+{stdenv,fetchurl, runTimePackage, fetchFromGithub, gcc, make, pkgconfig, binutils };
+stdenv.mkDerivation rec {
+ pname = "antinna";
+ version = "1.0.0";
+
+src = fetchurl {
+url = "https://example.com/${pname}-${version}-${stdenv.hostPlatform.system}.tar.gz";
+sha256 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+};
+dontBuild = true;
+installPhase = ''
+mkdir -p $out/bin
+cp ${pname} $out/bin/
+'';
+
+propagatedBuildInputs = [ runTimePackage ]
+meta = with stdenv.lib; {
+ description = "Fully Nix Based Package to Run All IDX templates";
+ homepage = "https://github.com/mg3994/${pname}"; # or use example.com
+ license = licenses.mit;
+ platforms = platforms.unix;
+};
+
+}
+
+
+```
+
